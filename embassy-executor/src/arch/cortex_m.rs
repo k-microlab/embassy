@@ -103,7 +103,9 @@ mod thread {
             loop {
                 unsafe {
                     self.inner.poll();
+                    asm!("dsb");
                     asm!("wfe");
+                    asm!("isb");
                 };
             }
         }
